@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Rive Button</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- 1. Page-level styling -->
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    /* Flexbox centres everything in the viewport */
+    body {
+      display: flex;
+      justify-content: center;  /* horizontal centring */
+      align-items: center;      /* vertical centring */
+      background: #ffffff;  
+    }
+    /* Let the canvas scale responsively if you prefer */
+    canvas {
+      width: 600px;
+    }
+  </style>
+
+  <!-- 2. Latest Rive runtime  -->
+  <script src="https://unpkg.com/@rive-app/webgl2"></script>
+  
+</head>
+
+<body>
+  <!-- 3. Canvas placeholder -->
+  <canvas id="rive-canvas" width="500" height="500"></canvas>
+
+  <!-- 4. Initialise Rive -->
+  <script>
+    const r = new rive.Rive({
+      src: 'a_delusional_serenade.riv',
+      canvas: document.getElementById('rive-canvas'),
+      autoplay: true,
+      autoBind: true,
+      artboard: 'ADS', 
+      stateMachines: 'SM1',
+
+      onLoad: () => {
+
+        r.resizeDrawingSurfaceToCanvas()
+      }
+    });
+
+
+    // Keep things sharp if the window is resized
+    window.addEventListener('resize', () =>
+      r.resizeDrawingSurfaceToCanvas()
+    );
+  </script>
+</body>
+</html>
